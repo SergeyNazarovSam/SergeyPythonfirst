@@ -25,7 +25,7 @@ def show_result(ruble: dict, kopeyki: dict) -> str:
     for nominal in ruble:
         value = ruble[nominal]
         res = res + f' {value} of {nominal} rubles; '
-    res = res + '\n'
+    #res = res + '<br>'
     for nominal in kopeyki:
         value = kopeyki[nominal]
         res = res + f' {value} of {nominal} kopeyek; '
