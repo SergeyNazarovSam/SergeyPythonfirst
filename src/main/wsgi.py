@@ -35,6 +35,7 @@ def empty_res(in_value: dict) -> str:
 
 def application(environ, start_response):
 
+
     qsi = parse_qs(environ["QUERY_STRING"])
 
     task_list = {
@@ -47,15 +48,18 @@ def application(environ, start_response):
     template, solution, status, title, input_dict = task_list.get(environ['PATH_INFO'],
                                                                   ('Index.html', empty_res, '404 Not Found', 'Check the path, please', {}))
 
+
     headers = {
         "Content-type": "text/html",
     }
+
 
     html_body = read_template(template)
     res = solution(input_dict)
     html_body = html_body.format(title=title, result=res)
 
     payload = html_body.encode()
+
 
     start_response(status, list(headers.items()))
 
