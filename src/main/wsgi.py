@@ -8,8 +8,8 @@ sentry_sdk.init(get_setting("SENTRY_DSN"), traces_sample_rate=1.0)
 
 
 def read_template(filename: str) -> str:
-    tempate_dir = DIR_SRC / 'main' / 'template'
-    template = tempate_dir / filename
+    template_dir = DIR_SRC / 'main' / 'template'
+    template = template_dir / filename
     assert template.is_file()       # check if file exists
     with template.open('r') as file_index:
         content = file_index.read()
@@ -29,7 +29,7 @@ def raise_error(environ: dict) -> str:
     return res
 
 
-def empty_res (in_value: dict) -> str:
+def empty_res(in_value: dict) -> str:
     return ''
 
 
