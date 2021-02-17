@@ -24,3 +24,5 @@ psycopg2-binary = "==2.8.6"
 sentry-sdk = "==0.19.5"
 atomicwrites = "*"
 dynaconf = {extras = [ "yaml",], version = "==3.1.2"}
+pydantic = "*"
+cherrypy = "*"
