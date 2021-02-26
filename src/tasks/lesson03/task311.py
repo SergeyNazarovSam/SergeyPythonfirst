@@ -1,6 +1,8 @@
 from typing import NoReturn
 from typing import Optional
 
+from django.http import HttpRequest, HttpResponse
+
 from main.custom_types import RequestT
 from main.custom_types import ResponseT
 from main.util import render_template
@@ -25,6 +27,27 @@ def handler(request: RequestT) -> ResponseT:
     document = render_template(TEMPLATE, context)
 
     response = ResponseT(payload=document)
+
+    return response
+
+
+def handler_django(request: HttpRequest) -> HttpResponse:
+    email = request.GET.get("email", "")
+
+    try:
+        solution(email)
+        result = email
+    except ValueError as err:
+        result = str(err)
+
+    context = {
+        "email": email,
+        "result": result,
+    }
+
+    document = render_template(TEMPLATE, context)
+
+    response = HttpResponse(document)
 
     return response
 

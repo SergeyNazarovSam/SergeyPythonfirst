@@ -2,6 +2,8 @@ import decimal
 from typing import Dict
 from typing import Tuple
 
+from django.http import HttpRequest, HttpResponse
+
 from main.custom_types import RequestT
 from main.custom_types import ResponseT
 from main.util import render_template
@@ -46,6 +48,26 @@ def handler(request: RequestT) -> ResponseT:
     document = render_template(TEMPLATE, context)
 
     response = ResponseT(payload=document)
+
+    return response
+
+
+def handler_django(request: HttpRequest) -> HttpResponse:
+    money_raw = request.GET.get("money", "")
+    money = parse_decimal(money_raw)
+
+    result1 = solution1(money)
+    result2 = solution2(money)
+
+    context = {
+        "money": money_raw,
+        "result1": result1,
+        "result2": result2,
+    }
+
+    document = render_template(TEMPLATE, context)
+
+    response = HttpResponse(document)
 
     return response
 

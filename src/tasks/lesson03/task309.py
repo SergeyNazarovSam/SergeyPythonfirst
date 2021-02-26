@@ -1,5 +1,6 @@
 from typing import TypeVar
 
+from django.http import HttpRequest, HttpResponse
 from pydantic import BaseModel
 from pydantic import validator
 
@@ -57,6 +58,34 @@ def handler(request: RequestT) -> ResponseT:
     document = render_template(TEMPLATE, context)
 
     response = ResponseT(payload=document)
+
+    return response
+
+
+def handler_django(request: HttpRequest) -> HttpResponse:
+    a_raw = request.GET.get("a", "") or ""
+    b_raw = request.GET.get("b", "") or ""
+    c_raw = request.GET.get("c", "") or ""
+    can_into_complex = bool(request.GET.get("can_into_complex"))
+
+    coefficients = CoefficientsT(a=a_raw, b=b_raw, c=c_raw)
+
+    try:
+        result = solution(coefficients, can_into_complex)
+    except ValueError as err:
+        result = f"нет решений ({err})"
+
+    context = {
+        "a": a_raw,
+        "b": b_raw,
+        "c": c_raw,
+        "can_into_complex": "checked" * can_into_complex,
+        "result": result,
+    }
+
+    document = render_template(TEMPLATE, context)
+
+    response = HttpResponse(document)
 
     return response
 
