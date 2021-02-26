@@ -1,5 +1,9 @@
 import pytest
+<<<<<<< HEAD
 from Homework.task_3_10 import solution_3_10
+=======
+from tasks.task_3_10 import solution_3_10
+>>>>>>> Sergey-Brunch2
 
 
 @pytest.mark.unit
