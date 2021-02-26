@@ -1,2 +1,2 @@
 release: make release
-web: gunicorn src/project.wsgi
+web: gunicorn project.wsgi
