@@ -137,7 +137,7 @@ data: static
 
 .PHONY: static
 static:
-	$(call log, collecting static)
+	$(PYTHON) src/manage.py collectstatic --noinput
 
 
 .PHONY: docker
