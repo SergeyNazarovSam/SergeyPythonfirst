@@ -12,7 +12,7 @@ include ./Makefile.in.mk
 # override to whatever works on your system
 
 WSGI_APPLICATION := main.wsgi:application
-LOCAL_RUN := $(PYTHON) -m main.app
+LOCAL_RUN := $(PYTHON) src/manage.py runserver
 
 include ./Makefile.targets.mk
 
