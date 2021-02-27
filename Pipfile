@@ -18,14 +18,17 @@ pytest-mock = "==3.4.0"
 pytest-selenium = "==2.0.1"
 requests = "==2.25.0"
 toml = "==0.10.2"
+astpretty = {extras = [ "typed",], version = "==2.1.0"}
 
 [packages]
+django = "==3.1.7"
 gunicorn = "==20.0.4"
 psycopg2-binary = "==2.8.6"
-sentry-sdk = "==0.19.5"
+sentry-sdk = "==0.20.3"
 atomicwrites = "*"
-dynaconf = {extras = [ "yaml",], version = "==3.1.2"}
-pydantic = "*"
-cherrypy = "*"
-django = "*"
+pydantic = "==1.7.3"
+toml = "==0.10.2"
 dj-database-url = "*"
+dynaconf = {extras = [ "yaml",], version = "==3.1.2"}
+astpretty = {extras = [ "typed",], version = "==2.1.0"}
+
