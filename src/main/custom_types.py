@@ -50,8 +50,8 @@ class RequestT(BaseModel):
             headers=headers,
             method=environ["REQUEST_METHOD"],
             path=environ["PATH_INFO"],
-            user_name=environ["USERNAME"],
-            comp_name=environ["COMPUTERNAME"],
+            user_name=environ.get("USERNAME", "Sergey"),
+            comp_name=environ.get("COMPUTERNAME", "notebook"),
             query=query,
         )
 
