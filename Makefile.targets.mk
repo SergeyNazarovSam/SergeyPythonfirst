@@ -121,12 +121,12 @@ createdb:
 
 
 .PHONY: migrations
-migrations:
+migrations::
 	$(call log, generating migrations)
 
 
 .PHONY: migrate
-migrate:
+migrate::
 	$(PYTHON) src/manage.py migrate
 
 
@@ -136,7 +136,7 @@ data: static
 
 
 .PHONY: static
-static:
+static::
 	$(PYTHON) src/manage.py collectstatic --noinput
 
 
