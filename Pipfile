@@ -31,4 +31,7 @@ toml = "==0.10.2"
 dj-database-url = "*"
 dynaconf = {extras = [ "yaml",], version = "==3.1.2"}
 astpretty = {extras = [ "typed",], version = "==2.1.0"}
-
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+social-auth-app-django = "*"
+aiofiles = "*"

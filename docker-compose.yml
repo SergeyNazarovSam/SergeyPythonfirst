@@ -5,19 +5,19 @@ services:
     container_name: alpha-web
     depends_on:
       - alpha-db
-    entrypoint: ["make", "wait-for-db", "run-prod"]
+    entrypoint: ["make", "wait-for-db", "release", "run-prod"]
     environment:
       PORT: 80
-      DATABASE_URL: "postgresql://alpha:alpha@alpha-db:5432/alpha"
+      DATABASE_URL: "postgresql://postgres:masterkey@alpha-db:5432/myFirstDB"
     image: alpha-web
     ports:
       - "8888:80"
   alpha-db:
     container_name: alpha-db
     environment:
-      POSTGRES_USER: alpha
-      POSTGRES_PASSWORD: alpha
-      POSTGRES_DB: alpha
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: masterkey
+      POSTGRES_DB: myFirstDB
     image: postgres:13.1-alpine
     ports:
       - "5555:5432"
@@ -32,4 +32,9 @@ services:
       - db-data:/var/lib/postgresql/data
 volumes:
   db-data:
-
+    name: db-data
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: size=100m

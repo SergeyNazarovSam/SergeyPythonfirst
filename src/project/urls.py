@@ -1,28 +1,25 @@
-from django.conf.urls import url
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from main.handlers import index, error_test
-from tasks.lesson01 import task103
-from tasks.lesson03 import task301, task302, task303, task304, task305, task306, task307, task309, task310, task311
-from tasks.lesson04 import task402
+from project import views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", index.handler_django),
-    path("e/", error_test.handler),
-    path("tasks/1/103/", task103.handler_django),
-    path("tasks/3/301/", task301.handler_django),
-    path("tasks/3/302/", task302.handler_django),
-    path("tasks/3/303/", task303.handler_django),
-    path("tasks/3/304/", task304.handler_django),
-    path("tasks/3/305/", task305.handler_django),
-    path("tasks/3/306/", task306.handler_django),
-    path("tasks/3/307/", task307.handler_django),
-    path("tasks/3/309/", task309.handler_django),
-    path("tasks/3/310/", task310.handler_django),
-    path("tasks/3/311/", task311.handler_django),
-    path("tasks/4/402/", task402.handler),
-    path("api/v1/tasks/402/", task402.handler_api),
+    path("", views.IndexView.as_view()),
+    path("b/", include("applications.blog.urls")),
+    path('', include('social_django.urls')),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("tasks/103/", include("applications.task103.urls")),
+    path("tasks/301/", include("applications.task301.urls")),
+    path("tasks/302/", include("applications.task302.urls")),
+    path("tasks/303/", include("applications.task303.urls")),
+    path("tasks/304/", include("applications.task304.urls")),
+    path("tasks/305/", include("applications.task305.urls")),
+    path("tasks/306/", include("applications.task306.urls")),
+    path("tasks/307/", include("applications.task307.urls")),
+    path("tasks/309/", include("applications.task309.urls")),
+    path("tasks/310/", include("applications.task310.urls")),
+    path("tasks/311/", include("applications.task311.urls")),
+    path("tasks/402/", include("applications.task402.urls")),
 ]

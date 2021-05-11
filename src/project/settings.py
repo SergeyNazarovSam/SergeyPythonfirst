@@ -16,6 +16,8 @@ import os
 import dj_database_url
 from dynaconf import settings
 
+from framework.dirs import DIR_PROJECT
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -24,6 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY", settings.SECRET_KEY)
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = settings.SOCIAL_AUTH_VK_OAUTH2_KEY
+SOCIAL_AUTH_VK_OAUTH2_SECRET = settings.SOCIAL_AUTH_VK_OAUTH2_SECRET
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = settings.MODE_DEBUG
@@ -44,7 +49,21 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    #'django.contrib.staticfiles',
+    'django.contrib.staticfiles',
+    'social_django',
+    "applications.blog.apps.BlogConfig",
+    "applications.task103.apps.Task103Config",
+    "applications.task301.apps.Task301Config",
+    "applications.task302.apps.Task302Config",
+    "applications.task303.apps.Task303Config",
+    "applications.task304.apps.Task304Config",
+    "applications.task305.apps.Task305Config",
+    "applications.task306.apps.Task306Config",
+    "applications.task307.apps.Task307Config",
+    "applications.task309.apps.Task309Config",
+    "applications.task310.apps.Task310Config",
+    "applications.task311.apps.Task311Config",
+    "applications.task402.apps.Task402Config",
 ]
 
 MIDDLEWARE = [
@@ -63,7 +82,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        "DIRS": [DIR_PROJECT / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,6 +90,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -106,6 +126,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ] if not DEBUG else []
 
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.vk.VKOAuth2',          # бекенд авторизации через ВКонтакте
+    'django.contrib.auth.backends.ModelBackend', # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
+)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -125,3 +150,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = '/b/'

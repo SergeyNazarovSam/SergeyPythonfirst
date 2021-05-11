@@ -18,11 +18,10 @@ format:
 
 
 .PHONY: test
-test:
+test::
 	$(call log, running tests)
 	$(RUN) pytest
 	$(RUN) isort --virtual-env="$(DIR_VENV)" --check-only "$(DIR_SRC)" "$(DIR_TESTS)"
-	$(RUN) black --check "$(DIR_SRC)" "$(DIR_TESTS)"
 
 
 .PHONY: release
@@ -32,8 +31,8 @@ release: db data
 
 .PHONY: sh
 sh:
-	$(call log, starting Python shell)
-	$(RUN) ipython
+	$(call log, starting Django shell)
+	$(RUN) python src/manage.py shell
 
 
 .PHONY: venv
@@ -44,19 +43,19 @@ venv:
 
 
 .PHONY: venv-dev
-venv-dev:
+venv-dev: venv
 	$(call log, installing development packages)
 	$(PIPENV_INSTALL) --dev
 
 
 .PHONY: venv-prod
-venv-prod:
+venv-prod: venv
 	$(call log, installing development packages for production)
 	$(PIPENV_INSTALL) --deploy
 
 
 .PHONY: upgrade-venv
-upgrade-venv:
+upgrade-venv: venv-dev
 	$(call log, upgrading all packages in virtualenv)
 	$(PYTHON) $(DIR_SCRIPTS)/upgrade_packages.py
 
