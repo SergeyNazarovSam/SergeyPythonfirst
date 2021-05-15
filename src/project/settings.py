@@ -27,8 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY", settings.SECRET_KEY)
 
-SOCIAL_AUTH_VK_OAUTH2_KEY = settings.SOCIAL_AUTH_VK_OAUTH2_KEY
-SOCIAL_AUTH_VK_OAUTH2_SECRET = settings.SOCIAL_AUTH_VK_OAUTH2_SECRET
+SOCIAL_AUTH_VK_OAUTH2_KEY = os.getenv("SOCIAL_AUTH_VK_OAUTH2_KEY", settings.SOCIAL_AUTH_VK_OAUTH2_KEY)
+SOCIAL_AUTH_VK_OAUTH2_SECRET = os.getenv("SOCIAL_AUTH_VK_OAUTH2_SECRET", settings.SOCIAL_AUTH_VK_OAUTH2_SECRET)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = settings.MODE_DEBUG
